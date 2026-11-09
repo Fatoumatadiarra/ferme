@@ -1,0 +1,148 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Palette AgriTech */
+  --color-agri-50: #f0fdf4;
+  --color-agri-100: #dcfce7;
+  --color-agri-200: #bbf7d0;
+  --color-agri-300: #86efac;
+  --color-agri-400: #4ade80;
+  --color-agri-500: #22c55e;
+  --color-agri-600: #16a34a;
+  --color-agri-700: #15803d;
+  --color-agri-800: #166534;
+  --color-agri-900: #14532d;
+  --color-agri-950: #052e16;
+
+  --color-earth-50: #faf6f1;
+  --color-earth-100: #f0e8db;
+  --color-earth-200: #e0cfba;
+  --color-earth-300: #ccb08f;
+  --color-earth-400: #b8926a;
+  --color-earth-500: #a67c52;
+  --color-earth-600: #8f6644;
+  --color-earth-700: #755038;
+  --color-earth-800: #614232;
+  --color-earth-900: #50382c;
+
+  --color-surface-light: #ffffff;
+  --color-surface-muted: #f8faf9;
+  --color-surface-dark: #0f1410;
+  --color-surface-card-dark: #1a211c;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Poppins', 'Inter', system-ui, sans-serif;
+
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 4px 16px rgba(22, 163, 74, 0.12), 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-sidebar: 4px 0 24px rgba(0, 0, 0, 0.06);
+
+  --animate-fade-in: fade-in 0.4s ease-out;
+  --animate-slide-up: slide-up 0.4s ease-out;
+  --animate-spin-slow: spin 1.5s linear infinite;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply m-0 min-h-svh bg-[radial-gradient(circle_at_top_left,_rgba(34,197,94,0.14),_transparent_30%),linear-gradient(135deg,_#f8faf9_0%,_#f3f7f1_100%)] font-sans text-gray-800 antialiased;
+    @apply dark:bg-[radial-gradient(circle_at_top_left,_rgba(34,197,94,0.18),_transparent_30%),linear-gradient(135deg,_#0f1410_0%,_#141d17_100%)] dark:text-gray-100;
+    background-attachment: fixed;
+  }
+
+  #root {
+    @apply min-h-svh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-gray-300 dark:bg-gray-600;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-agri-500;
+  }
+
+  ::selection {
+    @apply bg-agri-200 text-agri-950 dark:bg-agri-800 dark:text-white;
+  }
+
+  :focus-visible {
+    outline: 2px solid #22c55e;
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .text-gradient-agri {
+    @apply bg-linear-to-r from-agri-600 to-agri-400 bg-clip-text text-transparent;
+  }
+
+  .bg-gradient-agri {
+    @apply bg-linear-to-br from-agri-600 via-agri-500 to-agri-700;
+  }
+
+  .glass {
+    @apply border border-white/20 bg-white/80 backdrop-blur-md dark:border-white/10 dark:bg-surface-card-dark/80;
+  }
+
+  .dashboard-metric {
+    @apply relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-agri-200/80 hover:shadow-(--shadow-card-hover) dark:hover:border-agri-900/50;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
